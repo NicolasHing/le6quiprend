@@ -38,7 +38,7 @@ public class Plateau {
         return true;
     }
 
-    public List<Carte> getRangees(int rangeeIndex){
+    public List<Carte> getRangee(int rangeeIndex){
         return rangees.get(rangeeIndex);
         //Return la liste des cartes d'une rangée
     }
