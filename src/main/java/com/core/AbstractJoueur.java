@@ -3,6 +3,8 @@ package com.core;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO @amine : COMMENTER
+
 public abstract class AbstractJoueur implements OperationSurListeDeCarte{
     protected String nom;
     protected List<Carte> main;
@@ -14,6 +16,36 @@ public abstract class AbstractJoueur implements OperationSurListeDeCarte{
         this.cartesEncaissees = new ArrayList<>();
     }
 
+    public void ajouterCarteMain(Carte carte){
+        main.add(carte);
+    }
+
+    public void encaisserCates(List<Carte> cartes){
+        cartesEncaissees.addAll(cartes);
+    }
+
+    public void viderMain(){
+        main.clear();
+    }
+
+    public List<Carte> getMain() {
+        return main;
+    }
+
+    public List<Carte> getCartesEncaissees(){
+        return cartesEncaissees;
+    }
+
+    public String getNom(){
+        return nom;
+    }
+
+    public abstract List<Carte> choisirCartesAJouer(Plateau plateau);
+
+
+
+
+    /**
     @Override
     public int totalTetesDeBoeuf() {
         int total = 0;
@@ -22,4 +54,5 @@ public abstract class AbstractJoueur implements OperationSurListeDeCarte{
         }
         return total;
     }
+    **/
 }
