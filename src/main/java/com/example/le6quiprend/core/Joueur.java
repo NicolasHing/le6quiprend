@@ -1,12 +1,19 @@
 package com.example.le6quiprend.core;
 
+import com.example.le6quiprend.core.Carte;
+import com.example.le6quiprend.core.Plateau;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Joueur extends AbstractJoueur {
+
+    private int score;
+
     public Joueur(String nom) {
         super(nom);
+        this.score = 0;
     }
 
     @Override
@@ -29,24 +36,60 @@ public class Joueur extends AbstractJoueur {
                 ramasserCartesRangee(plateau);
             } else {
                 // Ajouter la carte à la rangée
-                cartesAJouer.add(main.get(numeroCarte - 1));
-                plateau.ajouterCarte(indexRangee, main.get(numeroCarte - 1));
-                main.remove(numeroCarte - 1);
+                cartesAJouer.add(getMain().get(numeroCarte - 1));
+                plateau.ajouterCarte(indexRangee, getMain().get(numeroCarte - 1));
+                getMain().remove(numeroCarte - 1);
             }
         }
 
         return cartesAJouer;
     }
 
-    // Vérifie si la carte peut être placée dans une rangée en respectant la règle 1
-    private boolean peutPlacerCarteDansRangee(int numeroCarte, Plateau plateau) {
-        for (List<Carte> rangee : plateau.getRangees()) {
-            if (rangee.isEmpty() || rangee.get(rangee.size() - 1).getValeur() < numeroCarte) {
-                return true;
-            }
+    public void afficherMain() {
+        System.out.println("Main de " + getNom() + ":");
+        for (int i = 0; i < getMain().size(); i++) {
+            Carte carte = getMain().get(i);
+            System.out.println((i + 1) + ". " + carte.getValeur() + " (" + carte.getTetesDeBoeuf() + " TdB)");
         }
-        return false;
     }
+
+    public void ajouterCarteInitial(Carte carte) {
+        getMain().add(carte);
+    }
+
+    public void jouerCarte(Plateau plateau) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Choisissez le numéro de la carte à jouer :");
+        int numeroCarte = scanner.nextInt();
+
+        List<Carte> cartesAJouer = choisirCartesAJouer(plateau);
+
+        if (!cartesAJouer.isEmpty()) {
+            System.out.println(getNom() + " joue la carte " + cartesAJouer.get(0).getValeur());
+        }
+    }
+
+    public void calculerScore() {
+        int score = 0;
+        for (Carte carte : getCartesEncaissees()) {
+            score += carte.getTetesDeBoeuf();
+        }
+        setScore(score);
+    }
+
+    public void afficherScore() {
+        System.out.println(getNom() + " - Score : " + getScore());
+    }
+
+// Vérifie si la carte peut être placée dans une rangée en respectant la règle 1
+private boolean peutPlacerCarteDansRangee(int numeroCarte, Plateau plateau) {
+    for (List<Carte> rangee : plateau.getRangees()) {
+        if (rangee.isEmpty() || rangee.get(rangee.size() - 1).getValeur() < numeroCarte) {
+            return true;
+        }
+    }
+    return false;
+}
 
     // Trouve la rangée où la différence entre la dernière carte déposée et la nouvelle est la plus faible, en respectant la règle 2
     private int trouverRangeeOptimale(int numeroCarte, Plateau plateau) {
@@ -74,7 +117,15 @@ public class Joueur extends AbstractJoueur {
         int numeroRangee = scanner.nextInt();
 
         List<Carte> rangee = plateau.getRangee(numeroRangee - 1);
-        cartesEncaissees.addAll(rangee);
+        getCartesEncaissees().addAll(rangee);
         rangee.clear();
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getScore() {
+        return score;
     }
 }
