@@ -1,23 +1,56 @@
 package com.example.le6quiprend;
 
+import com.example.le6quiprend.view.GamePresenter;
+import com.example.le6quiprend.view.GameView;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class HelloApplication extends Application {
+    Stage stage;
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
+        this.stage = stage;
+        VBox root = new VBox();
+        GameView gameView = new GameView();
+        //Game game = new Game();
+        GamePresenter gamePresenter = new GamePresenter(gameView,
+                //game,
+                this);
+        System.out.println("A new game has been started");
+        root.getChildren().add(gameView);
+        Scene scene = new Scene(root, 600, 600);
+        this.stage.setTitle("Le 6 qui prend");
+        this.stage.setScene(scene);
+        this.stage.show();
     }
 
-    public static void main(String[] args) {
-        launch();
+    public void declareWinner(int player) {
+        VBox root = new VBox();
+        Label label = new Label(String.format("Player %d has won the game! Congratulations!", player));
+        label.getStyleClass().add("label");
+        root.getStyleClass().add("vbox");
+        root.getStylesheets().add(
+                Objects.requireNonNull(
+                                getClass().getResource("style.css"))
+                        .toExternalForm()
+        );
+        root.getChildren().add(label);
+        Scene scene = new Scene(root, 600, 600);
+        this.stage.setTitle("End!");
+        this.stage.setScene(scene);
+        this.stage.show();
     }
+
+
+
+        public static void main(String[] args) {
+        launch(args);
+    }
+
 }
