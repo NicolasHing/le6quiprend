@@ -19,6 +19,11 @@ public class Pioche {
         Collections.shuffle(cartes);
     }
 
+    /**
+     * Prend la 1ere carte de la pioche et la renvoie
+     * Affiche dans la console si la pioche est vide
+     * @return 1ere carte de la pioche
+     */
     public Carte tirerCarte() {
         if (!cartes.isEmpty()) {
             return cartes.remove(0);

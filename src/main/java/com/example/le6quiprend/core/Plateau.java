@@ -8,21 +8,38 @@ public class Plateau {
     public static final int nombreDeRangee = 4;
     public static final int nombreCarteParRangee = 5;
 
+    /**
+     * Initialise le plateau
+     */
     public Plateau() {
-        rangees = new ArrayList<>();
+        this.rangees = new ArrayList<>();
         for (int i = 0; i < nombreDeRangee; i++) {
-            rangees.add(new ArrayList<>());
+            this.rangees.add(new ArrayList<>());
         }
     }
 
+    /**
+     * Ajoute carte à l'index rangeeIndex
+     * @param rangeeIndex
+     * @param carte
+     */
     public void ajouterCarte(int rangeeIndex, Carte carte) {
         rangees.get(rangeeIndex).add(carte);
     }
 
+    /**
+     * Permet de vider la rangée
+     * @param rangeeIndex
+     */
     public void viderRangee(int rangeeIndex) {
         rangees.get(rangeeIndex).clear();
     }
 
+    /**
+     *
+     * @param rangeeIndex
+     * @return true si la rangée est pleine
+     */
     public boolean estRangeeComplete(int rangeeIndex) {
         return rangees.get(rangeeIndex).size() >= 6;
     }
@@ -36,6 +53,11 @@ public class Plateau {
         return true;
     }
 
+    /**
+     *
+     * @param rangeeIndex
+     * @return rangees[rangeeIndex]
+     */
     public List<Carte> getRangee(int rangeeIndex) {
         return rangees.get(rangeeIndex);
     }
@@ -51,10 +73,10 @@ public class Plateau {
     public void afficherRangees() {
         System.out.println("Plateau :");
         for (int i = 0; i < nombreDeRangee; i++) {
-            System.out.print("Rangee " + (i + 1) + ": ");
+            System.out.print("Rangée " + (i + 1) + ": ");
             List<Carte> rangee = rangees.get(i);
             for (Carte carte : rangee) {
-                System.out.print(carte.getValeur() + " ");
+                System.out.printf("%d (%d) , ", carte.getValeur(), carte.getTetesDeBoeuf());
             }
             System.out.println();
         }
