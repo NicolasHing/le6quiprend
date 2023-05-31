@@ -5,7 +5,7 @@ import java.util.List;
 
 //TODO @amine : COMMENTER
 
-public abstract class AbstractJoueur implements OperationSurListeDeCarte{
+public abstract class AbstractJoueur {
     protected String nom;
     protected List<Carte> main;
     protected List<Carte> cartesEncaissees;
@@ -20,7 +20,7 @@ public abstract class AbstractJoueur implements OperationSurListeDeCarte{
         main.add(carte);
     }
 
-    public void encaisserCates(List<Carte> cartes){
+    public void encaisserCartes(List<Carte> cartes){
         cartesEncaissees.addAll(cartes);
     }
 
@@ -41,15 +41,4 @@ public abstract class AbstractJoueur implements OperationSurListeDeCarte{
     }
 
     public abstract List<Carte> choisirCartesAJouer(Plateau plateau);
-
-
-
-    @Override
-    public int totalTetesDeBoeuf() {
-        int total = 0;
-        for (Carte carte : cartesEncaissees) {
-            total += carte.getTetesDeBoeuf();
-        }
-        return total;
-    }
 }

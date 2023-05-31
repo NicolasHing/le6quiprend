@@ -49,7 +49,7 @@ public class Joueur extends AbstractJoueur {
         System.out.println("Main de " + getNom() + ":");
         for (int i = 0; i < getMain().size(); i++) {
             Carte carte = getMain().get(i);
-            System.out.println((i + 1) + ". " + carte.getValeur() + " (" + carte.getTetesDeBoeuf() + " TdB)");
+            System.out.println((i + 1) + ". " + carte.getValeur() + " (" + carte.getTetesDeBoeuf() + ")");
         }
     }
 

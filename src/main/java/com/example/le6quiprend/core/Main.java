@@ -1,4 +1,4 @@
-package com.example.le6quiprend;
+package com.example.le6quiprend.core;
 
 import com.example.le6quiprend.core.Partie;
 
