@@ -5,9 +5,11 @@ import java.util.List;
 
 public class Plateau {
     private List<List<Carte>>rangees;
+    public static final int nombreDeRangee = 4;
+    public static final int nombreCarteParRangee = 5;
 
     public Plateau() {
-        //Création des rangées, Qui est une liste de liste
+        //Création des rangées, qui est une liste de liste
         rangees = new ArrayList<>();
         for (int i=0; i<4; i++){
             rangees.add(new ArrayList<>());
@@ -41,6 +43,10 @@ public class Plateau {
     public List<Carte> getRangee(int rangeeIndex){
         return rangees.get(rangeeIndex);
         //Return la liste des cartes d'une rangée
+    }
+
+    public List<List<Carte>> getRangees(){
+        return rangees;
     }
 
     public int getNombreCartesDansRangee(int rangeeIndex){
