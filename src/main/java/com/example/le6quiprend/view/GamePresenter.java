@@ -3,45 +3,47 @@ package com.example.le6quiprend.view;
 
 import com.example.le6quiprend.HelloApplication;
 import com.example.le6quiprend.core.Plateau;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Shape;
-import javafx.util.Duration;
 
 public class GamePresenter {
 
     HelloApplication application;
-    GameView gameView;
+    PlateauCentral plateauCentral;
+    MainCarte mainCarte;
     //Game game;
 
-    public GamePresenter(GameView gameView,
+    public GamePresenter(PlateauCentral plateauCentral,
+                         MainCarte mainCarte,
                          //Game game,
                          HelloApplication application) {
-        this.gameView = gameView;
+        this.plateauCentral = plateauCentral;
+        this.mainCarte = mainCarte;
         //this.game = game;
         this.application = application;
         for (int i = 0; i < Plateau.nombreDeRangee; i++) {
             for (int j = 0; j < Plateau.nombreCarteParRangee; j++) {
                 Pane pane = new Pane();
-                pane.setOnMouseClicked(this::handleClick);
-                gameView.add(pane, i, j);
+                pane.setOnMouseClicked(this::handleClickPlateauCentral);
+                plateauCentral.add(pane, j, i);
             }
         }
+        for (int i = 0; i < 10; i++) {
+            Pane pane = new Pane();
+            pane.setOnMouseClicked(this::handleClickMainCarte);
+            mainCarte.add(pane, i,0);
+        }
+
     }
 
-    public void handleClick(MouseEvent e) {
-        System.out.println("I have been clicked!");
+    public void handleClickPlateauCentral(MouseEvent e) {
+        System.out.println("Plateau");
         System.out.printf("Coordinates of the click: %f x and %f y %n", e.getX(), e.getY());
         System.out.printf("I have been clicked by this pane: %s%n", e.getTarget());
         Pane pane = (Pane) e.getTarget();
         int row = GridPane.getRowIndex(pane);
-        int col = GridPane.getColumnIndex(pane);
+        System.out.println("r:" + row);
 
         /*
         if (game.isGameOver()) {
@@ -79,5 +81,14 @@ public class GamePresenter {
         }
 
          */
+    }
+
+    public void handleClickMainCarte(MouseEvent e) {
+        System.out.println("main");
+        System.out.printf("Coordinates of the click: %f x and %f y %n", e.getX(), e.getY());
+        System.out.printf("I have been clicked by this pane: %s%n", e.getTarget());
+        Pane pane = (Pane) e.getTarget();
+        int col = GridPane.getColumnIndex(pane);
+        System.out.println("c: " + col);
     }
 }
