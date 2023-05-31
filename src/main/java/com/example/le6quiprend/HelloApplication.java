@@ -24,7 +24,7 @@ public class HelloApplication extends Application {
                 this);
         System.out.println("A new game has been started");
         root.getChildren().add(gameView);
-        Scene scene = new Scene(root, 600, 600);
+        Scene scene = new Scene(root, 800, 800);
         this.stage.setTitle("Le 6 qui prend");
         this.stage.setScene(scene);
         this.stage.show();
@@ -35,13 +35,9 @@ public class HelloApplication extends Application {
         Label label = new Label(String.format("Player %d has won the game! Congratulations!", player));
         label.getStyleClass().add("label");
         root.getStyleClass().add("vbox");
-        root.getStylesheets().add(
-                Objects.requireNonNull(
-                                getClass().getResource("style.css"))
-                        .toExternalForm()
-        );
+        //root.getStylesheets().add(Objects.requireNonNull(getClass().getResource("style.css")).toExternalForm());
         root.getChildren().add(label);
-        Scene scene = new Scene(root, 600, 600);
+        Scene scene = new Scene(root, 800, 800);
         this.stage.setTitle("End!");
         this.stage.setScene(scene);
         this.stage.show();

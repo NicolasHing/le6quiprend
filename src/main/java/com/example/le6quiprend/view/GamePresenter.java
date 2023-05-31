@@ -42,6 +42,7 @@ public class GamePresenter {
         Pane pane = (Pane) e.getTarget();
         int row = GridPane.getRowIndex(pane);
         int col = GridPane.getColumnIndex(pane);
+
         /*
         if (game.isGameOver()) {
             System.out.println("The game is already finished!");
