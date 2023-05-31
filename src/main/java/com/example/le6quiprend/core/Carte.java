@@ -1,4 +1,4 @@
-package com.core;
+package com.example.le6quiprend.core;
 
 public class Carte {
     int valeur;

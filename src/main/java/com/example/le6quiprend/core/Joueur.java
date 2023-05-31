@@ -1,4 +1,4 @@
-package com.core;
+package com.example.le6quiprend.core;
 
 import java.util.ArrayList;
 import java.util.List;

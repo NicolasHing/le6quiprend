@@ -1,4 +1,4 @@
-package com.core;
+package com.example.le6quiprend.core;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +25,11 @@ public abstract class AbstractJoueur implements OperationSurListeDeCarte{
     }
 
     public void viderMain(){
-        main.clear();
+        this.main.clear();
     }
 
     public List<Carte> getMain() {
-        return main;
+        return this.main;
     }
 
     public List<Carte> getCartesEncaissees(){
@@ -44,8 +44,6 @@ public abstract class AbstractJoueur implements OperationSurListeDeCarte{
 
 
 
-
-    /**
     @Override
     public int totalTetesDeBoeuf() {
         int total = 0;
@@ -54,5 +52,4 @@ public abstract class AbstractJoueur implements OperationSurListeDeCarte{
         }
         return total;
     }
-    **/
 }

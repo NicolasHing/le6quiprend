@@ -1,4 +1,4 @@
-package com.example.le6quiprend;
+package com.example.le6quiprend.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
