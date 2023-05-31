@@ -2,7 +2,6 @@ package com.example.le6quiprend.core;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Partie {
     private List<Joueur> joueurs;
@@ -21,6 +20,13 @@ public class Partie {
 
         // Initialisation de la pioche
         pioche = new Pioche();
+
+        // Initialisation Rangée
+        for (int i = 0; i < Plateau.nombreDeRangee; i++) {
+            Carte carte = pioche.tirerCarte();
+            plateau.ajouterCarte(i, carte);
+        }
+
     }
 
     public void jouer() {
