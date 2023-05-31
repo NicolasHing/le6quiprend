@@ -42,9 +42,14 @@ public class Partie {
             afficherEtatJeu();
 
             // Chaque joueur joue une carte
+            List<Carte> cartesPourLeTour = new ArrayList<Carte>();
             for (Joueur joueur : joueurs) {
-                joueur.jouerCarte(plateau);
+                Carte carteAJouer = joueur.choisirCarteAJouer();
+                cartesPourLeTour.add(carteAJouer);
             }
+
+            // Placer les cartes sur le plateau
+            plateau.placerCartes(cartesPourLeTour);
 
             // Actualisation du plateau et des scores
             plateau.actualiserRangees();

@@ -10,33 +10,12 @@ public class IA extends AbstractJoueur {
     }
 
     @Override
-    public List<Carte> choisirCartesAJouer(Plateau plateau) {
-        List<Carte> cartesAJouer = new ArrayList<>();
-
+    public Carte choisirCarteAJouer() {
         // Choix d'une carte au hasard dans la main de l'IA
         Random random = new Random();
         int indexCarte = random.nextInt(getMain().size());
         Carte carte = getMain().get(indexCarte);
-
-        // Règle 4 : Si la carte ne peut être placée dans aucune rangée, ramasser toutes les cartes d'une rangée de son choix
-        if (!peutPlacerCarteDansRangee(carte.getValeur(), plateau)) {
-            System.out.println("La carte ne peut pas être placée dans une rangée. Ramassez toutes les cartes d'une rangée de votre choix.");
-            ramasserCartesRangee(plateau);
-        } else {
-            // Règle 2 : Trouver la rangée où la différence entre la dernière carte déposée et la nouvelle est la plus faible
-            int indexRangee = trouverRangeeOptimale(carte.getValeur(), plateau);
-            if (indexRangee == -1) {
-                System.out.println("Aucune rangée n'est disponible pour placer la carte. Ramassez toutes les cartes d'une rangée de votre choix.");
-                ramasserCartesRangee(plateau);
-            } else {
-                // Ajouter la carte à la rangée
-                cartesAJouer.add(carte);
-                plateau.ajouterCarte(indexRangee, carte);
-                getMain().remove(indexCarte);
-            }
-        }
-
-        return cartesAJouer;
+        return carte;
     }
 
     // Vérifie si la carte peut être placée dans une rangée en respectant la règle 1

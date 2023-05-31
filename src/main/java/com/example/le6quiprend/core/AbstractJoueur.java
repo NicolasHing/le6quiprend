@@ -40,5 +40,5 @@ public abstract class AbstractJoueur {
         return nom;
     }
 
-    public abstract List<Carte> choisirCartesAJouer(Plateau plateau);
+    public abstract Carte choisirCarteAJouer();
 }

@@ -1,6 +1,7 @@
 package com.example.le6quiprend.core;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Plateau {
@@ -91,5 +92,29 @@ public class Plateau {
             }
         }
     }
+
+    public void placerCartes(List<Carte> cartesPourLeTour) {
+        List<Integer> classeesParOrdreCroissant = new ArrayList<>();
+        for (Carte carte : cartesPourLeTour) {
+            classeesParOrdreCroissant.add(carte.getValeur());
+        }
+        Collections.sort(classeesParOrdreCroissant);
+        //on place chaque carte
+        for (int valeurTraite : classeesParOrdreCroissant) {
+            //vérifier règle 4
+        }
+    }
+    /*
+    public boolean regle4(Carte carte) {
+        boolean status = false;
+        for (List<Carte> cartesDeLaRangee : this.rangees) {
+            Carte deniereCarteDeLaRangee = cartesDeLaRangee.get(cartesDeLaRangee.size());
+            if (carte.getValeur()<) {
+            }
+        }
+        return status;
+    }
+
+     */
 
 }

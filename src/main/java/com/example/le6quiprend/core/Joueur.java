@@ -16,7 +16,31 @@ public class Joueur extends AbstractJoueur {
         this.score = 0;
     }
 
-    @Override
+    public void afficherMain() {
+        System.out.println("Main de " + getNom() + ":");
+        for (int i = 0; i < getMain().size(); i++) {
+            Carte carte = getMain().get(i);
+            System.out.println((i + 1) + ". " + carte.getValeur() + " (" + carte.getTetesDeBoeuf() + ")");
+        }
+    }
+
+    public void ajouterCarteInitial(Carte carte) {
+        getMain().add(carte);
+    }
+    /*
+    public void jouerCarte(Plateau plateau) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Choisissez le numéro de la carte à jouer :");
+        int numeroCarte = scanner.nextInt();
+
+        List<Carte> cartesAJouer = choisirCartesAJouer(plateau);
+
+        if (!cartesAJouer.isEmpty()) {
+            System.out.println(getNom() + " joue la carte " + cartesAJouer.get(0).getValeur());
+        }
+    }
+
+
     public List<Carte> choisirCartesAJouer(Plateau plateau) {
         Scanner scanner = new Scanner(System.in);
         List<Carte> cartesAJouer = new ArrayList<>();
@@ -45,29 +69,20 @@ public class Joueur extends AbstractJoueur {
         return cartesAJouer;
     }
 
-    public void afficherMain() {
-        System.out.println("Main de " + getNom() + ":");
-        for (int i = 0; i < getMain().size(); i++) {
-            Carte carte = getMain().get(i);
-            System.out.println((i + 1) + ". " + carte.getValeur() + " (" + carte.getTetesDeBoeuf() + ")");
-        }
-    }
+     */
 
-    public void ajouterCarteInitial(Carte carte) {
-        getMain().add(carte);
-    }
-
-    public void jouerCarte(Plateau plateau) {
+    /**
+     * Demande à l'utilisateur l'indice de la carte qu'il souhaite jouer
+     * @return Carte choisie
+     */
+    @Override
+    public Carte choisirCarteAJouer() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choisissez le numéro de la carte à jouer :");
-        int numeroCarte = scanner.nextInt();
-
-        List<Carte> cartesAJouer = choisirCartesAJouer(plateau);
-
-        if (!cartesAJouer.isEmpty()) {
-            System.out.println(getNom() + " joue la carte " + cartesAJouer.get(0).getValeur());
-        }
+        int numeroCarte = scanner.nextInt()-1;
+        return this.getMain().get(numeroCarte);
     }
+
 
     public void calculerScore() {
         int score = 0;
@@ -81,15 +96,15 @@ public class Joueur extends AbstractJoueur {
         System.out.println(getNom() + " - Score : " + getScore());
     }
 
-// Vérifie si la carte peut être placée dans une rangée en respectant la règle 1
-private boolean peutPlacerCarteDansRangee(int numeroCarte, Plateau plateau) {
-    for (List<Carte> rangee : plateau.getRangees()) {
-        if (rangee.isEmpty() || rangee.get(rangee.size() - 1).getValeur() < numeroCarte) {
-            return true;
+    // Vérifie si la carte peut être placée dans une rangée en respectant la règle 1
+    private boolean peutPlacerCarteDansRangee(int numeroCarte, Plateau plateau) {
+        for (List<Carte> rangee : plateau.getRangees()) {
+            if (rangee.isEmpty() || rangee.get(rangee.size() - 1).getValeur() < numeroCarte) {
+                return true;
+            }
         }
+        return false;
     }
-    return false;
-}
 
     // Trouve la rangée où la différence entre la dernière carte déposée et la nouvelle est la plus faible, en respectant la règle 2
     private int trouverRangeeOptimale(int numeroCarte, Plateau plateau) {
