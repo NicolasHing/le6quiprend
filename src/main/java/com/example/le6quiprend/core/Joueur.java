@@ -85,29 +85,38 @@ public class Joueur extends AbstractJoueur {
     }
 
     /**
-     * Pose la carte, récupère les cartes si la rangée est pleine
-     * @param tabLigne
-     * @param numLigne
+     * Pose la carte à la rangée numeroLigneAModifier, récupère les cartes si la rangée est pleine
+     * @param ancienneRangees
+     * @param numeroLigneAModifier
      * @return
      */
-    public Ligne[] poserCarte(Ligne[] tabLigne, int numLigne){
-        Ligne[] newTligne = new Ligne[tabLigne.length];
-        for (int i = 0; i < tabLigne.length; i++){//passe par chaque ligne du tableau.
-            if (i == numLigne){//si on est sur la ligne à modifier, on a deux cas : soit on pose la carte facilement car il y a la place, soit on il n'y a pas la place donc on recupere la ligne et on pose la carte en suite.
-                if ((tabLigne[i].getNbCarte() + 1) <= tabLigne[i].getLongueurMax() && this.carteChoisie.getValeur() > tabLigne[i].getTligneCarte()[tabLigne[i].getTligneCarte().length-1].getValeur()){
-                    newTligne[i] = new Ligne(i, tabLigne[i].getNbCarte()+1,tabLigne[i].getTligneCarte(),this.carteChoisie);
+    public List<List<Carte>> poserCarte(List<List<Carte>> ancienneRangees, int numeroLigneAModifier){
+        List<List<Carte>> newRangees = new ArrayList<>();
+
+        for (int i = 0; i < ancienneRangees.size(); i++){ // passe par chaque ligne du tableau.
+            List<Carte> rangee = ancienneRangees.get(i);
+
+            if (i == numeroLigneAModifier) { // On est sur la ligne à modifier
+                // soit on pose la carte facilement car il y a la place
+                if (rangee.size() + 1 < 6){
+                    rangee.add(this.carteChoisie);
+                    newRangees.set(i, rangee);
+                } else { // Soit, il n'y a pas la place
+                    // On récupère les cartes
+                    for (Carte carte : rangee) {
+                        this.cartesEncaissees.add(carte);
+                    }
+                    // On pose
+                    List<Carte> nouvelleRangee = new ArrayList<>();
+                    nouvelleRangee.add(this.carteChoisie);
+                    newRangees.set(i, nouvelleRangee);
                 }
-                else{
-                    this.nbTeteDeBoeuf = this.nbTeteDeBoeuf + Utile.RecupererTeteDeBoeuf(tabLigne[i]);
-                    newTligne[i] = new Ligne(i, this.carteChoisie);
-                }
-            }
-            else{//si on est sur une ligne a ne pas modifier.
-                newTligne[i] = new Ligne();
-                newTligne[i] = tabLigne[i];
+            } else { // On est sur une ligne à NE PAS modifier.
+                newRangees.set(i, rangee);
             }
         }
-        return newTligne;
+        this.carteChoisie = null;
+        return newRangees;
     }
 
     public void calculerScore() {
@@ -171,4 +180,5 @@ public class Joueur extends AbstractJoueur {
     public int getScore() {
         return score;
     }
+
 }

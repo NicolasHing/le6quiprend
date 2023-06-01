@@ -80,4 +80,9 @@ public class Carte {
     public int getValeur() {
         return valeur;
     }
+
+    public String toString() {
+        String string = this.valeur + " (" + tetesDeBoeuf + ")" ;
+        return string;
+    }
 }

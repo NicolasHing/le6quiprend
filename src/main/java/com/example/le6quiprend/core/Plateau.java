@@ -93,6 +93,10 @@ public class Plateau {
         }
     }
 
+    public void setRangees(List<List<Carte>> rangees) {
+        this.rangees = rangees;
+    }
+
     /*
     public void placerCartes(List<Carte> cartesPourLeTour) {
         List<Integer> classeesParOrdreCroissant = new ArrayList<>();

@@ -38,11 +38,12 @@ public class Partie {
         while (!partieTerminee()) {
             System.out.println("----- Tour " + tour + " -----");
 
-            // Affichage de l'état du jeu
-            afficherEtatJeu();
+            // Affichage du plateau
+            plateau.afficherRangees();
 
-            // Chaque joueur joue une carte
+            // Pour chaque joueur, affichage de la main et choix
             for (Joueur joueur : this.joueurs) {
+                joueur.afficherMain();
                 joueur.choisirCarteAJouer();
             }
 
@@ -51,20 +52,13 @@ public class Partie {
 
             // Placer carte sur le plateau
             for (int i = 0; i < this.joueurs.size(); i++){
-                if (joueurs.get(i).getCarteChoisie().ComparerCarte(this.plateau.getRangees())){
-                    this.Tligne = joueurs.get(i).poserCarte(this.Tligne,joueurs.get(i).getCarteChoisie().PlusPetiteDiff(this.plateau.getRangees()));
+                if (joueurs.get(i).getCarteChoisie().ComparerCarte(this.plateau.getRangees())){ // La carte posable sur l'une des rangées avec la règle 1
+                    this.plateau.setRangees(joueurs.get(i).poserCarte(this.plateau.getRangees(),joueurs.get(i).getCarteChoisie().PlusPetiteDiff(this.plateau.getRangees())));
                 }
-                else {
-                    System.out.println("La carte que tu as choisi " + Tjoueur[i] + " ne peut pas être posée.");
-                    System.out.println("Tu dois choisir une ligne dont tu récupèreras toutes les têtes de boeuf");
-                    System.out.println("Voici les lignes");
-                    for (int j = 0; j < 4; j++){
-                        System.out.print(this.Tligne[j] + " ");
-                        for (int k = 0; k < this.Tligne[j].getTligneCarte().length; k++){
-                            System.out.print(" " + this.Tligne[j].getTligneCarte()[k] + " ");
-                        }
-                        System.out.println();
-                    }
+                else { // La carte est trop petite
+                    System.out.println(this.joueurs.get(i).getNom() + ", la carte " + this.joueurs.get(i).getCarteChoisie().toString() + " ne peut pas être posée.");
+                    System.out.println("Récupère une des lignes suivantes :");
+                    plateau.afficherRangees();
                     this.Tligne = Tjoueur[i].PoserCarte(this.Tligne,Tjoueur[i].ChoisirLigne());
                 }
             }
@@ -122,13 +116,6 @@ public class Partie {
         for (Joueur joueur : joueurs) {
             joueur.calculerScore();
         }
-    }
-
-    private void afficherEtatJeu() {
-        for (Joueur joueur : joueurs) {
-            joueur.afficherMain();
-        }
-        plateau.afficherRangees();
     }
 
     private void afficherScoreFinal() {
