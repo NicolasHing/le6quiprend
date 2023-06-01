@@ -52,14 +52,16 @@ public class Partie {
 
             // Placer carte sur le plateau
             for (int i = 0; i < this.joueurs.size(); i++){
-                if (joueurs.get(i).getCarteChoisie().ComparerCarte(this.plateau.getRangees())){ // La carte posable sur l'une des rangées avec la règle 1
-                    this.plateau.setRangees(joueurs.get(i).poserCarte(this.plateau.getRangees(),joueurs.get(i).getCarteChoisie().PlusPetiteDiff(this.plateau.getRangees())));
+                Joueur joueur = this.joueurs.get(i);
+                Carte carteChoisie = joueur.getCarteChoisie();
+                if (carteChoisie.ComparerCarte(this.plateau.getRangees())){ // La carte posable sur l'une des rangées avec la règle 1
+                    this.plateau.setRangees(joueur.poserCarte(this.plateau.getRangees(),carteChoisie.PlusPetiteDiff(this.plateau.getRangees())));
                 }
                 else { // La carte est trop petite
-                    System.out.println(this.joueurs.get(i).getNom() + ", la carte " + this.joueurs.get(i).getCarteChoisie().toString() + " ne peut pas être posée.");
+                    System.out.println(joueur.getNom() + ", la carte " + carteChoisie.afficherCarte() + " ne peut pas être posée.");
                     System.out.println("Récupère une des lignes suivantes :");
                     plateau.afficherRangees();
-                    this.Tligne = Tjoueur[i].PoserCarte(this.Tligne,Tjoueur[i].ChoisirLigne());
+                    this.plateau.setRangees(joueur.poserCarte(this.plateau.getRangees(),joueur.choisirLigne()));
                 }
             }
 

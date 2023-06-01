@@ -97,11 +97,11 @@ public class Joueur extends AbstractJoueur {
             List<Carte> rangee = ancienneRangees.get(i);
 
             if (i == numeroLigneAModifier) { // On est sur la ligne à modifier
-                // soit on pose la carte facilement car il y a la place
-                if (rangee.size() + 1 < 6){
+                // soit on pose la carte facilement car il y a la place et c'est plus grand
+                if (rangee.size() + 1 < 6 && this.carteChoisie.getValeur() > rangee.get(ancienneRangees.size() - 1).getValeur()){
                     rangee.add(this.carteChoisie);
                     newRangees.set(i, rangee);
-                } else { // Soit, il n'y a pas la place
+                } else { // Soit, il n'y a pas la place,
                     // On récupère les cartes
                     for (Carte carte : rangee) {
                         this.cartesEncaissees.add(carte);
@@ -117,6 +117,17 @@ public class Joueur extends AbstractJoueur {
         }
         this.carteChoisie = null;
         return newRangees;
+    }
+
+    /**
+     * Le joueur choisi la ligne
+     */
+    public int choisirLigne(){
+        Scanner joueur = new Scanner(System.in);
+        int numLigne = joueur.nextInt();
+        numLigne = numLigne - 1;
+
+        return numLigne;
     }
 
     public void calculerScore() {

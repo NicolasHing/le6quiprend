@@ -1,7 +1,6 @@
 package com.example.le6quiprend.core;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Plateau {
@@ -77,7 +76,7 @@ public class Plateau {
             System.out.print("Rangée " + (i + 1) + ": ");
             List<Carte> rangee = rangees.get(i);
             for (Carte carte : rangee) {
-                System.out.printf("%d (%d) , ", carte.getValeur(), carte.getTetesDeBoeuf());
+                System.out.print(carte.afficherCarte() + ", ");
             }
             System.out.println();
         }
