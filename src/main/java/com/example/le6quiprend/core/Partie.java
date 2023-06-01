@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Partie {
-    private List<Joueur> joueurs;
-    private Plateau plateau;
-    private Pioche pioche;
+    private List<AbstractJoueur> joueurs;
+    private final Plateau plateau;
+    private final Pioche pioche;
 
     public Partie(List<String> nomsJoueurs) {
         // Initialisation des joueurs
@@ -42,7 +42,7 @@ public class Partie {
             plateau.afficherRangees();
 
             // Pour chaque joueur, affichage de la main et choix
-            for (Joueur joueur : this.joueurs) {
+            for (AbstractJoueur joueur : this.joueurs) {
                 joueur.afficherMain();
                 joueur.choisirCarteAJouer();
             }
@@ -51,22 +51,20 @@ public class Partie {
             trierJoueur();
 
             // Placer carte sur le plateau
-            for (int i = 0; i < this.joueurs.size(); i++){
-                Joueur joueur = this.joueurs.get(i);
+            for (AbstractJoueur joueur : this.joueurs) {
                 Carte carteChoisie = joueur.getCarteChoisie();
-                if (carteChoisie.ComparerCarte(this.plateau.getRangees())){ // La carte posable sur l'une des rangées avec la règle 1
-                    this.plateau.setRangees(joueur.poserCarte(this.plateau.getRangees(),carteChoisie.PlusPetiteDiff(this.plateau.getRangees())));
-                }
-                else { // La carte est trop petite
+                if (carteChoisie.ComparerCarte(this.plateau.getRangees())) { // La carte posable sur l'une des rangées avec la règle 1
+                    this.plateau.setRangees(joueur.poserCarte(this.plateau.getRangees(), carteChoisie.PlusPetiteDiff(this.plateau.getRangees())));
+                } else { // La carte est trop petite
                     System.out.println(joueur.getNom() + ", la carte " + carteChoisie.afficherCarte() + " ne peut pas être posée.");
                     System.out.println("Récupère une des lignes suivantes :");
                     plateau.afficherRangees();
-                    this.plateau.setRangees(joueur.poserCarte(this.plateau.getRangees(),joueur.choisirLigne()));
+                    this.plateau.setRangees(joueur.poserCarte(this.plateau.getRangees(), joueur.choisirLigne(this.plateau.getRangees())));
                 }
             }
 
             // Afficher score actuel
-            for (Joueur joueur : joueurs) {
+            for (AbstractJoueur joueur : joueurs) {
                 joueur.afficherScore();
             }
 
@@ -80,10 +78,10 @@ public class Partie {
 
     private void distribuerCartesInitialesEtTrierMain() {
         int nombreDeCartesDepart = 10;
-        for (Joueur joueur : joueurs) {
+        for (AbstractJoueur joueur : joueurs) {
             for (int i = 0; i < nombreDeCartesDepart; i++) {
                 Carte carte = pioche.tirerCarte();
-                joueur.ajouterCarteInitial(carte);
+                joueur.main.add(carte);
             }
             joueur.trierMain();
         }
@@ -98,14 +96,14 @@ public class Partie {
                     posMin = j;
                 }
             }
-            Joueur temp = this.joueurs.get(posMin);
+            AbstractJoueur temp = this.joueurs.get(posMin);
             this.joueurs.set(posMin, this.joueurs.get(i));
             this.joueurs.set(i,temp);
         }
     }
 
     private boolean partieTerminee() {
-        for (Joueur joueur : joueurs) {
+        for (AbstractJoueur joueur : joueurs) {
             if (joueur.getMain().isEmpty()) {
                 return true;
             }
@@ -116,7 +114,7 @@ public class Partie {
 
     private void afficherScoreFinal() {
         System.out.println("----- Score final -----");
-        for (Joueur joueur : joueurs) {
+        for (AbstractJoueur joueur : joueurs) {
             joueur.afficherScore();
         }
         System.out.println("-----------------------");

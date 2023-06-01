@@ -17,57 +17,17 @@ public class Plateau {
             this.rangees.add(new ArrayList<>());
         }
     }
-
     /**
      * Ajoute carte à l'index rangeeIndex
-     * @param rangeeIndex
-     * @param carte
+     * @param rangeeIndex L'index où ajouter la carte
+     * @param carte La carte à ajouter
      */
     public void ajouterCarte(int rangeeIndex, Carte carte) {
         rangees.get(rangeeIndex).add(carte);
     }
 
-    /**
-     * Permet de vider la rangée
-     * @param rangeeIndex
-     */
-    public void viderRangee(int rangeeIndex) {
-        rangees.get(rangeeIndex).clear();
-    }
-
-    /**
-     *
-     * @param rangeeIndex
-     * @return true si la rangée est pleine
-     */
-    public boolean estRangeeComplete(int rangeeIndex) {
-        return rangees.get(rangeeIndex).size() >= 6;
-    }
-
-    public boolean estPlateauComplet() {
-        for (int i = 0; i < nombreDeRangee; i++) {
-            if (!estRangeeComplete(i)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     *
-     * @param rangeeIndex
-     * @return rangees[rangeeIndex]
-     */
-    public List<Carte> getRangee(int rangeeIndex) {
-        return rangees.get(rangeeIndex);
-    }
-
     public List<List<Carte>> getRangees() {
         return rangees;
-    }
-
-    public int getNombreCartesDansRangee(int rangeeIndex) {
-        return rangees.get(rangeeIndex).size();
     }
 
     public void afficherRangees() {
@@ -83,38 +43,7 @@ public class Plateau {
         System.out.println();
     }
 
-
-
-
     public void setRangees(List<List<Carte>> rangees) {
         this.rangees = rangees;
     }
-
-    /*
-    public void placerCartes(List<Carte> cartesPourLeTour) {
-        List<Integer> classeesParOrdreCroissant = new ArrayList<>();
-        for (Carte carte : cartesPourLeTour) {
-            classeesParOrdreCroissant.add(carte.getValeur());
-        }
-        Collections.sort(classeesParOrdreCroissant);
-        //on place chaque carte
-        for (int valeurTraite : classeesParOrdreCroissant) {
-            //vérifier règle 4
-        }
-    }
-     */
-
-    /*
-    public boolean regle4(Carte carte) {
-        boolean status = false;
-        for (List<Carte> cartesDeLaRangee : this.rangees) {
-            Carte deniereCarteDeLaRangee = cartesDeLaRangee.get(cartesDeLaRangee.size());
-            if (carte.getValeur()<) {
-            }
-        }
-        return status;
-    }
-
-     */
-
 }
