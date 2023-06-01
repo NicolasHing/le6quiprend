@@ -1,6 +1,7 @@
-package com.example.le6quiprend.core;
+package com.example.le6quiprend.console;
 
 import com.example.le6quiprend.core.Partie;
+import com.example.le6quiprend.core.Plateau;
 
 import java.util.ArrayList;
 import java.util.List;

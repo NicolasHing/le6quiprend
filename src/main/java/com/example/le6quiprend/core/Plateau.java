@@ -93,6 +93,7 @@ public class Plateau {
         }
     }
 
+    /*
     public void placerCartes(List<Carte> cartesPourLeTour) {
         List<Integer> classeesParOrdreCroissant = new ArrayList<>();
         for (Carte carte : cartesPourLeTour) {
@@ -104,6 +105,8 @@ public class Plateau {
             //vérifier règle 4
         }
     }
+     */
+
     /*
     public boolean regle4(Carte carte) {
         boolean status = false;

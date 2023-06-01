@@ -9,12 +9,15 @@ public class IA extends AbstractJoueur {
         super("IA");
     }
 
+    /** Choix d'une carte au hasard dans la main de l'IA et la place dans attribu
+     * @return la carte choisie
+     */
     @Override
     public Carte choisirCarteAJouer() {
-        // Choix d'une carte au hasard dans la main de l'IA
         Random random = new Random();
         int indexCarte = random.nextInt(getMain().size());
         Carte carte = getMain().get(indexCarte);
+        this.carteChoisie = carte;
         return carte;
     }
 

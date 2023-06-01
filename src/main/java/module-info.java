@@ -11,4 +11,6 @@ module com.example.le6quiprend {
     opens com.example.le6quiprend.core to javafx.fxml;
     exports com.example.le6quiprend.view;
     opens com.example.le6quiprend.view to javafx.fxml;
+    exports com.example.le6quiprend.console;
+    opens com.example.le6quiprend.console to javafx.fxml;
 }

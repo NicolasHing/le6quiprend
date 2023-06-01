@@ -42,14 +42,35 @@ public class Partie {
             afficherEtatJeu();
 
             // Chaque joueur joue une carte
-            List<Carte> cartesPourLeTour = new ArrayList<Carte>();
-            for (Joueur joueur : joueurs) {
-                Carte carteAJouer = joueur.choisirCarteAJouer();
-                cartesPourLeTour.add(carteAJouer);
+            for (Joueur joueur : this.joueurs) {
+                joueur.choisirCarteAJouer();
             }
 
-            // Placer les cartes sur le plateau
-            plateau.placerCartes(cartesPourLeTour);
+            // Classer les joueurs par le numéro de carte
+            trierJoueur();
+
+            // Placer carte sur le plateau
+            for (int i = 0; i < this.joueurs.size(); i++){
+                if (joueurs.get(i).getCarteChoisie().ComparerCarte(this.plateau.getRangees())){
+                    this.Tligne = joueurs.get(i).poserCarte(this.Tligne,joueurs.get(i).getCarteChoisie().PlusPetiteDiff(this.plateau.getRangees()));
+                }
+                else {
+                    System.out.println("La carte que tu as choisi " + Tjoueur[i] + " ne peut pas être posée.");
+                    System.out.println("Tu dois choisir une ligne dont tu récupèreras toutes les têtes de boeuf");
+                    System.out.println("Voici les lignes");
+                    for (int j = 0; j < 4; j++){
+                        System.out.print(this.Tligne[j] + " ");
+                        for (int k = 0; k < this.Tligne[j].getTligneCarte().length; k++){
+                            System.out.print(" " + this.Tligne[j].getTligneCarte()[k] + " ");
+                        }
+                        System.out.println();
+                    }
+                    this.Tligne = Tjoueur[i].PoserCarte(this.Tligne,Tjoueur[i].ChoisirLigne());
+                }
+            }
+
+
+
 
             // Actualisation du plateau et des scores
             plateau.actualiserRangees();
@@ -64,11 +85,27 @@ public class Partie {
     }
 
     private void distribuerCartesInitiales() {
+        int nombreDeCartesDepart = 10;
         for (Joueur joueur : joueurs) {
-            for (int i = 0; i < Plateau.nombreCarteParRangee; i++) {
+            for (int i = 0; i < nombreDeCartesDepart; i++) {
                 Carte carte = pioche.tirerCarte();
                 joueur.ajouterCarteInitial(carte);
             }
+        }
+    }
+
+    public void trierJoueur(){
+        int posMin;
+        for (int i = 0; i < this.joueurs.size() - 1; i++){
+            posMin = i;
+            for (int j = i +1; j < this.joueurs.size(); j++){
+                if (this.joueurs.get(j).getCarteChoisie().getValeur() < this.joueurs.get(posMin).getCarteChoisie().getValeur()){
+                    posMin = j;
+                }
+            }
+            Joueur temp = this.joueurs.get(posMin);
+            this.joueurs.set(posMin, this.joueurs.get(i));
+            this.joueurs.set(i,temp);
         }
     }
 
@@ -101,4 +138,7 @@ public class Partie {
         }
         System.out.println("-----------------------");
     }
+
+
+
 }

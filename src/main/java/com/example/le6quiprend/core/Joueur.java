@@ -80,9 +80,35 @@ public class Joueur extends AbstractJoueur {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choisissez le numéro de la carte à jouer :");
         int numeroCarte = scanner.nextInt()-1;
-        return this.getMain().get(numeroCarte);
+        Carte carte = this.getMain().get(numeroCarte);
+        return carte;
     }
 
+    /**
+     * Pose la carte, récupère les cartes si la rangée est pleine
+     * @param tabLigne
+     * @param numLigne
+     * @return
+     */
+    public Ligne[] poserCarte(Ligne[] tabLigne, int numLigne){
+        Ligne[] newTligne = new Ligne[tabLigne.length];
+        for (int i = 0; i < tabLigne.length; i++){//passe par chaque ligne du tableau.
+            if (i == numLigne){//si on est sur la ligne à modifier, on a deux cas : soit on pose la carte facilement car il y a la place, soit on il n'y a pas la place donc on recupere la ligne et on pose la carte en suite.
+                if ((tabLigne[i].getNbCarte() + 1) <= tabLigne[i].getLongueurMax() && this.carteChoisie.getValeur() > tabLigne[i].getTligneCarte()[tabLigne[i].getTligneCarte().length-1].getValeur()){
+                    newTligne[i] = new Ligne(i, tabLigne[i].getNbCarte()+1,tabLigne[i].getTligneCarte(),this.carteChoisie);
+                }
+                else{
+                    this.nbTeteDeBoeuf = this.nbTeteDeBoeuf + Utile.RecupererTeteDeBoeuf(tabLigne[i]);
+                    newTligne[i] = new Ligne(i, this.carteChoisie);
+                }
+            }
+            else{//si on est sur une ligne a ne pas modifier.
+                newTligne[i] = new Ligne();
+                newTligne[i] = tabLigne[i];
+            }
+        }
+        return newTligne;
+    }
 
     public void calculerScore() {
         int score = 0;
@@ -125,7 +151,9 @@ public class Joueur extends AbstractJoueur {
         return indexRangeeOptimale;
     }
 
-    // Ramasse toutes les cartes d'une rangée de son choix, en respectant la règle 3
+    /**
+     * Ramasse toutes les cartes d'une rangée de son choix, en respectant la règle 3
+     */
     private void ramasserCartesRangee(Plateau plateau) {
         System.out.println("Choisissez le numéro de la rangée à ramasser :");
         Scanner scanner = new Scanner(System.in);

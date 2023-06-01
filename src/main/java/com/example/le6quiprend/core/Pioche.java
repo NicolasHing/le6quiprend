@@ -8,11 +8,11 @@ public class Pioche {
     private List<Carte> cartes;
 
     public Pioche() {
-        cartes = new ArrayList<>();
+        this.cartes = new ArrayList<>();
 
         // Ajouter les cartes à la pioche (valeurs de 1 à 104)
         for (int valeur = 1; valeur <= 104; valeur++) {
-            cartes.add(new Carte(valeur));
+            this.cartes.add(new Carte(valeur));
         }
 
         // Mélanger les cartes
