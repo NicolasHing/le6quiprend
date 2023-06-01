@@ -62,5 +62,17 @@ public abstract class AbstractJoueur {
 
     }
 
+    public int getScore() {
+        int sum = 0;
+        for (Carte carte : this.cartesEncaissees) {
+            sum += carte.getTetesDeBoeuf();
+        }
+        return sum;
+    }
+
+    public void afficherScore() {
+        System.out.println(getNom() + " - Score : " + getScore());
+    }
+
     public abstract Carte choisirCarteAJouer();
 }

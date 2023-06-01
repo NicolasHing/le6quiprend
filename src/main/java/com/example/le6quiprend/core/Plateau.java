@@ -73,10 +73,10 @@ public class Plateau {
     public void afficherRangees() {
         System.out.println("Plateau :");
         for (int i = 0; i < nombreDeRangee; i++) {
-            System.out.print("Rangée " + (i + 1) + ": ");
+            System.out.print("Rangée " + (i + 1) + " : ");
             List<Carte> rangee = rangees.get(i);
             for (Carte carte : rangee) {
-                System.out.print(carte.afficherCarte() + ", ");
+                System.out.print(carte.afficherCarte() + " ");
             }
             System.out.println();
         }
@@ -84,13 +84,7 @@ public class Plateau {
     }
 
 
-    public void actualiserRangees() {
-        for (int i = 0; i < nombreDeRangee; i++) {
-            if (estRangeeComplete(i)) {
-                viderRangee(i);
-            }
-        }
-    }
+
 
     public void setRangees(List<List<Carte>> rangees) {
         this.rangees = rangees;

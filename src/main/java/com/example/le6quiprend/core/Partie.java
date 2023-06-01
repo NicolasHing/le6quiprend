@@ -31,7 +31,7 @@ public class Partie {
 
     public void jouer() {
         // Distribution des cartes initiales aux joueurs
-        distribuerCartesInitiales();
+        distribuerCartesInitialesEtTrierMain();
 
         // Tour de jeu
         int tour = 1;
@@ -65,12 +65,10 @@ public class Partie {
                 }
             }
 
-
-
-
-            // Actualisation du plateau et des scores
-            plateau.actualiserRangees();
-            actualiserScores();
+            // Afficher score actuel
+            for (Joueur joueur : joueurs) {
+                joueur.afficherScore();
+            }
 
             // Passage au tour suivant
             tour++;
@@ -80,13 +78,14 @@ public class Partie {
         afficherScoreFinal();
     }
 
-    private void distribuerCartesInitiales() {
+    private void distribuerCartesInitialesEtTrierMain() {
         int nombreDeCartesDepart = 10;
         for (Joueur joueur : joueurs) {
             for (int i = 0; i < nombreDeCartesDepart; i++) {
                 Carte carte = pioche.tirerCarte();
                 joueur.ajouterCarteInitial(carte);
             }
+            joueur.trierMain();
         }
     }
 
@@ -114,11 +113,6 @@ public class Partie {
         return false;
     }
 
-    private void actualiserScores() {
-        for (Joueur joueur : joueurs) {
-            joueur.calculerScore();
-        }
-    }
 
     private void afficherScoreFinal() {
         System.out.println("----- Score final -----");

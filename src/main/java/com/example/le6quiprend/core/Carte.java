@@ -86,7 +86,7 @@ public class Carte {
      * @return "valeur (TdB)"
      */
     public String afficherCarte() {
-        String string = this.valeur + " (" + tetesDeBoeuf + ")" ;
+        String string = this.valeur + "(" + tetesDeBoeuf + ")" ;
         return string;
     }
 }
