@@ -36,7 +36,7 @@ public class Plateau {
             System.out.print("Rangée " + (i + 1) + " : ");
             List<Carte> rangee = rangees.get(i);
             for (Carte carte : rangee) {
-                System.out.print(carte.afficherCarte() + " ");
+                System.out.print(carte.toString() + " ");
             }
             System.out.println();
         }

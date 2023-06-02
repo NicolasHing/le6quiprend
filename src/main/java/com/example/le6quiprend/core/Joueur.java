@@ -17,7 +17,7 @@ public class Joueur extends AbstractJoueur {
         System.out.println("Main de " + getNom() + ":");
         for (int i = 0; i < getMain().size(); i++) {
             Carte carte = getMain().get(i);
-            System.out.println((i + 1) + ". " + carte.afficherCarte());
+            System.out.println((i + 1) + ". " + carte.toString());
         }
     }
 
@@ -31,9 +31,6 @@ public class Joueur extends AbstractJoueur {
         int numeroCarte = scanner.nextInt()-1;
         this.carteChoisie = this.main.remove(numeroCarte);
     }
-
-
-
 
     /**
      * Le joueur choisi la ligne

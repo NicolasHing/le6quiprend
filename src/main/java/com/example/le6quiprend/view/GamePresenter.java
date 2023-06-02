@@ -2,6 +2,7 @@ package com.example.le6quiprend.view;
 
 
 import com.example.le6quiprend.HelloApplication;
+import com.example.le6quiprend.core.Partie;
 import com.example.le6quiprend.core.Plateau;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -12,15 +13,15 @@ public class GamePresenter {
     HelloApplication application;
     PlateauCentral plateauCentral;
     MainCarte mainCarte;
-    //Game game;
+    Partie partie;
 
     public GamePresenter(PlateauCentral plateauCentral,
                          MainCarte mainCarte,
-                         //Game game,
+                         Partie partie,
                          HelloApplication application) {
         this.plateauCentral = plateauCentral;
         this.mainCarte = mainCarte;
-        //this.game = game;
+        this.partie = partie;
         this.application = application;
         for (int i = 0; i < Plateau.nombreDeRangee; i++) {
             for (int j = 0; j < Plateau.nombreCarteParRangee; j++) {

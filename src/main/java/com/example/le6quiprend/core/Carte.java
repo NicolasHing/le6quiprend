@@ -28,7 +28,7 @@ public class Carte {
      * @param rangees Toutes les lignes du plateau
      * @return true si carte posable dans une des lignes
      */
-    public boolean ComparerCarte(List<List<Carte>> rangees){
+    public boolean comparerCarte(List<List<Carte>> rangees){
         boolean posable = false;
         int i = 0;
         while (!posable && i < rangees.size()) {// on parcourt toutes les lignes.
@@ -85,7 +85,7 @@ public class Carte {
      *
      * @return "valeur (TdB)"
      */
-    public String afficherCarte() {
+    public String toString() {
         String string = this.valeur + "(" + tetesDeBoeuf + ")" ;
         return string;
     }

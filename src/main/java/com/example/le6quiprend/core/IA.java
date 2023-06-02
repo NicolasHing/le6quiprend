@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Random;
 
 public class IA extends AbstractJoueur {
-    public IA() {
-        super("IA");
+    public IA(String nom) {
+        super(nom);
     }
 
 
@@ -24,7 +24,8 @@ public class IA extends AbstractJoueur {
         int valeurMin = 200;
         int indiceDeRangeeAvecLeMoinsTdB = 0;
         for (int i = 0; i < rangees.size(); i++) {
-            Carte carte = rangees.get(i).get(rangees.size() - 1);
+            List<Carte> rangee = rangees.get(i);
+            Carte carte = rangee.get(rangee.size() - 1);
             if (carte.getValeur() < valeurMin) {
                 valeurMin = carte.getValeur();
                 indiceDeRangeeAvecLeMoinsTdB = i;

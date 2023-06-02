@@ -94,7 +94,6 @@ public abstract class AbstractJoueur {
         return sum;
     }
 
-    public abstract void afficherMain();
     /**
      * Affiche :
      * nomJoueur - Score : getScore
@@ -103,6 +102,7 @@ public abstract class AbstractJoueur {
         System.out.println(getNom() + " - Score : " + getScore());
     }
 
+    public abstract void afficherMain();
     public abstract void choisirCarteAJouer();
     public abstract int choisirLigne(List<List<Carte>> rangees);
 }

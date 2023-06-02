@@ -12,7 +12,11 @@ public class Partie {
         // Initialisation des joueurs
         joueurs = new ArrayList<>();
         for (String nom : nomsJoueurs) {
-            joueurs.add(new Joueur(nom));
+            if (nom.contains("IA")) {
+                joueurs.add(new IA(nom));
+            } else {
+                joueurs.add(new Joueur(nom));
+            }
         }
 
         // Initialisation du plateau
@@ -53,10 +57,10 @@ public class Partie {
             // Placer carte sur le plateau
             for (AbstractJoueur joueur : this.joueurs) {
                 Carte carteChoisie = joueur.getCarteChoisie();
-                if (carteChoisie.ComparerCarte(this.plateau.getRangees())) { // La carte posable sur l'une des rangées avec la règle 1
+                if (carteChoisie.comparerCarte(this.plateau.getRangees())) { // La carte posable sur l'une des rangées avec la règle 1
                     this.plateau.setRangees(joueur.poserCarte(this.plateau.getRangees(), carteChoisie.PlusPetiteDiff(this.plateau.getRangees())));
                 } else { // La carte est trop petite
-                    System.out.println(joueur.getNom() + ", la carte " + carteChoisie.afficherCarte() + " ne peut pas être posée.");
+                    System.out.println(joueur.getNom() + ", la carte " + carteChoisie.toString() + " ne peut pas être posée.");
                     System.out.println("Récupère une des lignes suivantes :");
                     plateau.afficherRangees();
                     this.plateau.setRangees(joueur.poserCarte(this.plateau.getRangees(), joueur.choisirLigne(this.plateau.getRangees())));
