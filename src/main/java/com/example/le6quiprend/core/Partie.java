@@ -106,7 +106,7 @@ public class Partie {
         }
     }
 
-    private boolean partieTerminee() {
+    public boolean partieTerminee() {
         for (AbstractJoueur joueur : joueurs) {
             if (joueur.getMain().isEmpty()) {
                 return true;
@@ -124,6 +124,7 @@ public class Partie {
         System.out.println("-----------------------");
     }
 
-
-
+    public Plateau getPlateau() {
+        return plateau;
+    }
 }

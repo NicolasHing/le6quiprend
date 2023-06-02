@@ -50,6 +50,7 @@ public class HelloApplication extends Application {
             try {
                 this.nombreDeJoueur = Integer.parseInt(nameField.getText());
                 choixNomScene();
+                System.out.println("Nombre de joueurs : " + nombreDeJoueur);
                 this.stage.setScene(sceneChoixNom);
             }
             catch (NumberFormatException e) {
@@ -82,6 +83,9 @@ public class HelloApplication extends Application {
                 }
                 this.partie = new Partie(joueurs);
                 debutPartieScene();
+                for (int i = 0; i < nombreDeJoueur; i++) {
+                    System.out.println((i+1) + ". " + joueurs.get(i));
+                }
                 this.stage.setScene(sceneDebutPartie);
             }
             catch (NumberFormatException e) {
@@ -105,9 +109,9 @@ public class HelloApplication extends Application {
     }
 
 
-    public void declareWinner(int player) {
+    public void declareWinner(String player) {
         VBox root = new VBox();
-        Label label = new Label(String.format("Player %d has won the game! Congratulations!", player));
+        Label label = new Label("Player " + player + " has won the game! Congratulations!");
         label.getStyleClass().add("label");
         root.getStyleClass().add("vbox");
         //root.getStylesheets().add(Objects.requireNonNull(getClass().getResource("style.css")).toExternalForm());
